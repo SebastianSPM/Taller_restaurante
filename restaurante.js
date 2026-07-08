@@ -124,7 +124,6 @@ const calcularCuenta = (pedido) => {
 }
 
 
-platosPorCategoría(newMenu,)
 while(stop != 0){
 
     menuPrincipal()
