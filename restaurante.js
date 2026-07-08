@@ -7,6 +7,7 @@ let newMenu = []
 let opcion = 0;
 let opcionAnterior = 0;
 let salir = 1;
+let seleccion = 0;
 
 const menu = [
     {
@@ -130,30 +131,31 @@ const calcularCuenta = (pedido) => {
 while(salir != 0){
 
     menuPrincipal()
-    opcion = parseInt(prompt("Selecciona una opción: "));
+    seleccion = parseInt(prompt("Selecciona una opción: "));
 
-    switch(opcion){
+    switch(seleccion){
         case 1:
             mostrarMenu(menu);
             break;
         case 2:
             newMenu = soloDisponible(menu);
             mostrarMenu(newMenu)
-            opcionAnterior = 2;
+            opcionAnterior = seleccion;
             break;
         case 3:
-            opccion = 0;
             if(opcionAnterior == 0){
                 console.log("Porfavor, primero mire los platos disponibles(opcion 2)...");
             }else{
                 pedido = tomarPedido(newMenu);
+                opcionAnterior = 3;
             }
             break;
         case 4:
-            if(pedido === undefined || pedido == []){
-                console.log("Porfavor, primero pida los platos(opcion 3)...");
-            }else{
+            
+            if(opcionAnterior == 3){
                 calcularCuenta(pedido)
+            }else{
+                console.log("Porfavor, primero pida los platos(opcion 3)...");
             }
             break;
         case 5:
