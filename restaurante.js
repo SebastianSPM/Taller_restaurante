@@ -6,6 +6,7 @@ let aux = "";
 let newMenu = []
 let opcion = 0;
 let opcionAnterior = 0;
+let salir = 1;
 
 const menu = [
     {
@@ -35,10 +36,12 @@ const menu = [
 ]
 
 const menuPrincipal = () => {
-    console.log("1) Mostrar platos");
+    console.log("\n1) Mostrar platos");
     console.log("2) Mostrar platos disponibles");
     console.log("3) Pedir platos");
     console.log("4) Calcular cuenta");
+    console.log("5) Salir");
+    
 }
 
 const mostrarMenu = (newMenu) => {
@@ -64,7 +67,7 @@ const soloDisponible = (menu) => {
 const tomarPedido = (newMenu) => {
     do{
 
-        console.log(" === PEDIDO === ");
+        console.log("\n === PEDIDO === ");
 
         console.log("1) Agregar un nuevo plato");
         console.log("2) Quitar el último plato:");
@@ -73,7 +76,7 @@ const tomarPedido = (newMenu) => {
         opcion = parseInt(prompt("Ingresa la opción:  "));
 
         if(opcion == 1){
-            aux = prompt("Ingresa el nombre del plato: ");
+            aux = prompt("\nIngresa el nombre del plato: ");
             if(aux == "" || aux.length < 0){
                 console.log("No haz agregado ningun plato");
             }else{
@@ -124,20 +127,22 @@ const calcularCuenta = (pedido) => {
 }
 
 
-while(stop != 0){
+while(salir != 0){
 
     menuPrincipal()
     opcion = parseInt(prompt("Selecciona una opción: "));
 
     switch(opcion){
         case 1:
-            mostrarMenu(newMenu);
+            mostrarMenu(menu);
             break;
         case 2:
             newMenu = soloDisponible(menu);
+            mostrarMenu(newMenu)
             opcionAnterior = 2;
             break;
         case 3:
+            opccion = 0;
             if(opcionAnterior == 0){
                 console.log("Porfavor, primero mire los platos disponibles(opcion 2)...");
             }else{
@@ -151,9 +156,11 @@ while(stop != 0){
                 calcularCuenta(pedido)
             }
             break;
+        case 5:
+            salir = 0;
+            break;
         default:
             console.log("\nSelecciona una de las 4 opciones.\n");
     }
 
-    
 }
